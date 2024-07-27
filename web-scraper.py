@@ -20,8 +20,8 @@ with requests.session() as session:
         # Dapatkan cookie atau token sesi
         cookies = post.cookies
         
-        index = 1
-        while index < 1500:
+        index = 8
+        while index < 700:
             str_index = str(index)
             # Buat request ke halaman yang ingin di-scrape
             response = session.get(url_scrape + str_index, cookies=cookies)
@@ -36,7 +36,7 @@ with requests.session() as session:
             text_result = str_index + ","
             for result in results:
                 if result['type']== 'text':
-                    text_result += result['value']+',';
+                    text_result += '"' + result['value'] + '"' + ',';
             print(text_result)
             index += 1
     else:

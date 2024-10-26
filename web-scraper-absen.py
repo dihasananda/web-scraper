@@ -1,6 +1,7 @@
 import requests
 import os
 import csv
+import sys
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 # import pandas as pd
@@ -19,6 +20,7 @@ kelas_asal = 22
 jadwal_kegiatan = 8
 absen_number = 0
 absen_kelas = 0
+tanggal = sys.argv[1]
 
 with requests.session() as session:
     login_session = session.post(url_login, data=login_payload)
@@ -32,7 +34,7 @@ with requests.session() as session:
                 'unit_sekolah_asal': 1,
                 'kelas_asal': kelas_asal, # 22 - 47
                 'jadwal_kegiatan': jadwal_kegiatan, # 8 - 12
-                'tanggal': '2024-10-04',
+                'tanggal': tanggal,
                 'cetak_harian': 'PRINT',
                 'bulan': 10,
                 'tahun': 2024,
@@ -63,7 +65,7 @@ with requests.session() as session:
         kelas_asal += 1
         print('load :', absen_kelas)
 
-with open('/mnt/c/Users/Asus/Desktop/data.csv', 'w') as f:
+with open('/mnt/c/Users/Asus/Desktop/data ' + tanggal +'.csv', 'w') as f:
      
     # using csv.writer method from CSV package
     write = csv.writer(f)
